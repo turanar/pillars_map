@@ -1,0 +1,33 @@
+html { height: 100% }
+body { height: 100%; margin: 0; padding: 0 }
+#map_canvas { height: 100% }
+h4,p {
+  border: 0 none;
+  margin: 0;
+  padding: 0;
+}
+.info-window-content {
+  font: 12px 'Arial',Verdana,sans-serif;
+  width: 200px
+}
+.menu {
+    text-align: left;
+    font-family: Verdana,sans-serif;
+    font-size: 13px;
+    background: none repeat scroll 0% 0% rgb(255, 255, 255);
+    padding: 5px 6px;
+    border: 1px solid rgb(113, 123, 135);
+    box-shadow: 0pt 2px 4px rgba(0, 0, 0, 0.4);
+    font-weight: bold;
+}
+.label {
+    font-family: 'EB Garamond', serif;
+    font-size: 13pt;
+    text-align: center;
+    color: #f5fbcf;
+    text-shadow: 2px 2px 1px #000000;
+    overflow: visible !important;
+}
+.selected img {
+    filter:brightness(150%);
+}

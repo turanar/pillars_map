@@ -9,16 +9,16 @@ GMICMapType.prototype.maxZoom = 19;
 GMICMapType.prototype.getTile = function(coord, zoom, ownerDocument) {
     var tilex=coord.x;
     var tiley=coord.y;
-
+    
     var xoffset = Math.floor((Math.pow(2,zoom) - zoomSize[zoom][0])/2);
     var yoffset = Math.floor((Math.pow(2,zoom) - zoomSize[zoom][1])/2);
     var width = xoffset + zoomSize[zoom][0];
     var height = yoffset + zoomSize[zoom][1];
-
+    
     zoomSize[6] = [zoomSize[5][0]*2,zoomSize[5][1]*2];
     zoomSize[4] = [zoomSize[5][0]/2,zoomSize[5][1]/2];
     zoomSize[3] = [zoomSize[4][0]/2,zoomSize[4][1]/2];
-
+      
     if ((tilex < xoffset)||(tilex>= width)||(tiley < yoffset)||(tiley >= (height)))
     {
     	var blank = ownerDocument.createElement('DIV');
@@ -56,7 +56,7 @@ function load() {
     var latlng = new google.maps.LatLng(0.0,0.0);
     var myOptions = {
         zoom: 5,
-        minZoom: 4,
+        minZoom: 3,
         maxZoom: 6,
         center: latlng,
         panControl: false,
@@ -71,8 +71,4 @@ function load() {
     map = new google.maps.Map(document.getElementById("map"), myOptions);
     gmicMapType = new GMICMapType();
     map.mapTypes.set("ImageCutter",gmicMapType);
-    map.addListener('click', function(e) {
-      console.log(e.latLng.lat() + "," + e.latLng.lng());
-    });
-
-}
+}  
