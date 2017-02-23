@@ -93,5 +93,9 @@ function load() {
 				google.maps.event.addListener(marker,'mouseout',function(element){
 					$(this.markerWrapper_).removeClass('selected');
 				});
+				google.maps.event.addListener(marker,'click',function(element){
+					console.log($('a',this.markerWrapper_));
+					$('a',this.markerWrapper_).click();
+				});
 		});
 }

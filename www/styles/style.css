@@ -31,3 +31,6 @@ h4,p {
 .selected img {
     filter:brightness(150%);
 }
+.imgMarker {
+  border:0px solid none;
+}
