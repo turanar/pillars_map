@@ -43,8 +43,8 @@ var WorldMapType = {
 	setOpacity: function(newOpacity) {
 	    this.opacity = newOpacity;
 	    for (var i = 0; i < this.cache.length; i++) {
-	        this.cache[i].style.opacity = newOpacity; //mozilla
-	        this.cache[i].style.filter = "alpha(opacity=" + newOpacity * 100 + ")"; //ie
+	        this.cache[i].style.opacity = newOpacity;
+	        this.cache[i].style.filter = "alpha(opacity=" + newOpacity * 100 + ")";
 	    }
 	}
 };
@@ -52,38 +52,34 @@ var WorldMapType = {
 var markerArray = [];
 
 function load() {
-	var latlng = new google.maps.LatLng(0.0,0.0);
-	var myOptions = {
-	        zoom: 5,
-	        minZoom: 5,
-	        maxZoom: 5,
-	        center: latlng,
-	        panControl: false,
-	        zoomControl: true,
-	        mapTypeControl: false,
-	        scaleControl: false,
-	        streetViewControl: false,
-	        overviewMapControl: false,
-	        backgroundColor: '#000000',
-	        mapTypeId: "WorldMap"
-	};
+		var latlng = new google.maps.LatLng(0.0,0.0);
+		var myOptions = {
+				zoom: 5,
+				minZoom: 5,
+				maxZoom: 5,
+				center: latlng,
+				panControl: false,
+				zoomControl: true,
+				mapTypeControl: false,
+				scaleControl: false,
+				streetViewControl: false,
+				overviewMapControl: false,
+				backgroundColor: '#000000',
+				mapTypeId: "WorldMap"
+		};
     map = new google.maps.Map(document.getElementById("map"), myOptions);
     map.mapTypes.set("WorldMap",WorldMapType);
 
-    // bounds of the desired area
     var allowedBounds = new google.maps.LatLngBounds(
-         new google.maps.LatLng(-20,-40),
-         new google.maps.LatLng(20,40)
+         new google.maps.LatLng(-20.427012814257385,-42.1875),
+         new google.maps.LatLng(20.427012814257385,42.1875)
     );
     var lastValidCenter = map.getCenter();
 
     google.maps.event.addListener(map, 'center_changed', function() {
         if (allowedBounds.contains(map.getCenter())) {
-            // still within valid bounds, so save the last valid position
-            lastValidCenter = map.getCenter();
-            return;
+            lastValidCenter = map.getCenter(); return;
         }
-        // not valid anymore => return to last valid position
         map.panTo(lastValidCenter);
     });
 
@@ -98,20 +94,4 @@ function load() {
 					$(this.markerWrapper_).removeClass('selected');
 				});
 		});
-
-    function addMarker(location, map) {
-      var marker = new RichMarker({
-		      name: "Wilderness",
-		      position: location,
-		      shadow:'',
-					draggable: true,
-		      content: "<img id='id_gilded_vale' class='imgMarker' src='images/wilderness.png'><div class='label'>Wilderness</div>",
-					map: map
-		    });
-				markerArray.push(marker);
-    };
-
-    google.maps.event.addListener(map, 'click', function(event) {
-        addMarker(event.latLng, map);
-    });
 }
